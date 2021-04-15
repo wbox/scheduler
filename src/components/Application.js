@@ -99,7 +99,9 @@ export default function Application(props) {
 
     Promise.all(promisses).then((all) => {
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
+      // console.log(all[2].data);
     });
+
 
   }, []);
       
@@ -114,34 +116,38 @@ export default function Application(props) {
       //const setDays = days => setState(prev => ({ ...prev, days}));
       // ^^ Removed according with https://web.compass.lighthouselabs.ca/days/w07d3/activities/1012
       
-  return (
-    <main className="layout">
+      return (
+        <main className="layout">
       <section className="sidebar">
       <img
           className="sidebar--centered"
           src="images/logo.png"
           alt="Interview Scheduler"
-        />
+          />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList 
             days={state.days} 
             day={state.day} 
             setDay={setDay} 
-          />
+            />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
           alt="Lighthouse Labs"
-        />
+          />
       </section>
       <section className="schedule">
+
         {getAppointmentsForDay(state, state.day).map((appointment) => {
           return (
-            <Appointment key={appointment.id} {...appointment} />
-          )
-        })}
+            <Appointment 
+            key={appointment.id} 
+            {...appointment} />
+            )
+          })}
+
         < Appointment key="last" time="6pm" />
       </section>
     </main>
