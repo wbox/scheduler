@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import "components/Application.scss";
-import DayList from "./DayList";
-import InterviewerListItem from "./InterviewerListItem";
+import DayList from "components/DayList";
+// import InterviewerListItem from "components/InterviewerListItem";
 import Appointment from "components/Appointment";
+import getAppointmentsForDay from "helpers/selectors";
 
-const appointments = [
+const arrAppointments = [
   {
     id: 1,
     time: "12pm",
@@ -77,23 +78,42 @@ const appointments = [
 
 export default function Application(props) {
 
-  const [ day, setDay ] = useState("");
-  const [ days, setDays ] = useState([]);
-
-
+  const [ state, setState ] = useState({
+    day: "Monday",
+    days: [],
+    appointments: arrAppointments
+  });
+  
   useEffect(() => {
-    const url="http://localhost:8001/api/days";
-    axios.get(url)
-      .then((res) => {
-        console.log(res.data);
-        setDays(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }, [day])
-  // Not sure if day should be the useEffect condition
 
+    const urls = {
+      "GET_DAYS": "http://localhost:8001/api/days",
+      "GET_APPOINTMENTS": "http://localhost:8001/api/appointments",
+      "GET_INTERVIEWERS": "http://localhost:8001/api/interviewers"
+    };
+
+    const pGetDays = axios.get(urls.GET_DAYS);
+    const pGetAppointments = axios.get(urls.GET_APPOINTMENTS);
+    const pGetInterviewers = axios.get(urls.GET_INTERVIEWERS);
+    const promisses = [ pGetDays, pGetAppointments, pGetInterviewers ];
+
+    Promise.all(promisses).then((all) => {
+      setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
+    });
+
+  }, []);
+      
+      // here, ...state is taking the entire object from line 83
+      // and overwriting day with the value from 84 which is the current
+      // state or whatever the value will be when this function is called
+  const setDay = day => setState({ ...state, day});
+      
+      // It is taking the previous state for days (which is [] - see line 85)
+      // and overwriting it with the new value for days coming from the line 94
+      // (in this case)
+      //const setDays = days => setState(prev => ({ ...prev, days}));
+      // ^^ Removed according with https://web.compass.lighthouselabs.ca/days/w07d3/activities/1012
+      
   return (
     <main className="layout">
       <section className="sidebar">
@@ -105,8 +125,8 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList 
-            days={days} 
-            day={day} 
+            days={state.days} 
+            day={state.day} 
             setDay={setDay} 
           />
         </nav>
@@ -117,8 +137,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
-        {appointments.map((appointment) => {
+        {getAppointmentsForDay(state, state.day).map((appointment) => {
           return (
             <Appointment key={appointment.id} {...appointment} />
           )
