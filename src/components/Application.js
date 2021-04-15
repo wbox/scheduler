@@ -4,7 +4,7 @@ import "components/Application.scss";
 import DayList from "components/DayList";
 // import InterviewerListItem from "components/InterviewerListItem";
 import Appointment from "components/Appointment";
-import getAppointmentsForDay from "helpers/selectors";
+import { getAppointmentsForDay, getInterview } from "helpers/selectors";
 
 const arrAppointments = [
   {
@@ -99,7 +99,7 @@ export default function Application(props) {
 
     Promise.all(promisses).then((all) => {
       setState(prev => ({...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data}));
-      // console.log(all[2].data);
+      console.log(all[2].data);
     });
 
 
@@ -115,7 +115,21 @@ export default function Application(props) {
       // (in this case)
       //const setDays = days => setState(prev => ({ ...prev, days}));
       // ^^ Removed according with https://web.compass.lighthouselabs.ca/days/w07d3/activities/1012
-      
+  
+  // W07D04
+  const schedule = getAppointmentsForDay(state, state.day).map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    console.log("interview from getIntervew ===> ", interview);
+    return (
+      <Appointment 
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+      />
+      )
+    })
+  
       return (
         <main className="layout">
       <section className="sidebar">
@@ -139,14 +153,6 @@ export default function Application(props) {
           />
       </section>
       <section className="schedule">
-
-        {getAppointmentsForDay(state, state.day).map((appointment) => {
-          return (
-            <Appointment 
-            key={appointment.id} 
-            {...appointment} />
-            )
-          })}
 
         < Appointment key="last" time="6pm" />
       </section>
