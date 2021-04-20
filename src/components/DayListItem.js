@@ -1,46 +1,30 @@
-import React from 'react';
+import React from "react";
 import "components/DayListItem.scss";
-import classNames from "classnames/bind";
-
-/* 
- * This component takes three attributes (name, spots, selected) and one action (setDay) as props 
- * We will need to update our DayListItem to reflect this after building our stories
-*/
+const classNames = require('classnames');
 
 export default function DayListItem(props) {
-  
-  const liClass = classNames("li", {
-    "day-list__item": true,
+  const dayClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
-    "day-list__item--full": props.spots === 0
+    "day-list__item--full": !props.spots
   });
 
-  const formatSpot = (spots) => {
 
-    if (!spots) {
-      return 'no spots remaining';
+  const formatSpots = () => {
+    if (!props.spots) {
+      return "no spots remaining";
     }
-
-    if (spots === 1) {
-       return spots + ' spot remaining';
-    } 
-    
-    if (spots >= 2) {
-      return spots + ' spots remaining';
+    if (props.spots === 1) {
+      return `${props.spots} spot remaining`;
     }
-
+    if (props.spots > 1) {
+      return `${props.spots} spots remaining`;
+    }
   }
 
-  let sText = formatSpot(props.spots);
-
   return (
-    <li
-      onClick={() => props.setDay(props.name)}
-      selected={props.selected}
-      className={liClass}
-    >
-      <h2 className="text-regular">{props.name}</h2>
-      <h3 className="text-light">{sText}</h3>
+    <li onClick={() => props.setDay(props.name)} className={dayClass}>
+      <h2>{props.name}</h2>
+      <h3>{formatSpots()}</h3>
     </li>
-  )
+  );
 }
