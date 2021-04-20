@@ -83,5 +83,18 @@ export default {
       });
     }
 
+  }),
+
+  put: jest.fn(url => {
+
+    // console.log("Test");
+    // console.log("after 92");
+
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
+      });
+
   })
+
 }
