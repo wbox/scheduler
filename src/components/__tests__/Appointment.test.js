@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import Appointment from "components/Appointment/index";
 
 describe("Appointment", () => {
-  it("defaults to Monday and changes the schedule when a new day is selected", () => {
+  it("renders without crashing", () => {
     render(<Appointment />);
   });
 });
