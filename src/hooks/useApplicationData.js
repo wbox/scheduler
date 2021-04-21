@@ -41,7 +41,7 @@ export default function useApplicationData() {
   }
 
   function bookInterview(id, interview) {
-    return axios.put(`api/appointments/${id}`, { interview })
+    return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
         const appointment = {
           ...state.appointments[id],
