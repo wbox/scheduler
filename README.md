@@ -74,7 +74,7 @@ npm run storybook
 ## Final Product
 
 ### Appointments List
-![List of Appointments]()
+![List of Appointments](https://github.com/wbox/scheduler/blob/master/docs/list.png)
 
 ### Deleting Appointment
 ![Deleting an Appointment](https://github.com/wbox/scheduler/blob/master/docs/delete.png)
