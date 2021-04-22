@@ -1,6 +1,5 @@
 # Interview Scheduler
 
-
 ## Functional Requirements
 
 * Development focuses on a single page application (SPA) called Interview Scheduler, built using React.
@@ -51,8 +50,9 @@ Both servers run concurrently; requests are proxied from the Webpack development
 
 ## Setup
 
-Install dependencies with `npm install`.
-
+* Clone the [Scheduler API](https://github.com/lighthouse-labs/scheduler-api) repository and follow the instructions to get it up and running. Make sure you perform a [db reset](http://localhost:8001/api/debug/reset) before run Scheduler App.
+* Clone the Scheduler App repo from [here](https://github.com/wbox/scheduler)
+* Install dependencies with `npm install`.
 ## Running Webpack Development Server
 
 ```sh
@@ -70,3 +70,13 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Final Product
+
+### Appointments List
+![]
+### Deleting Appointment
+![]
+
+### Creating Appointment
+![]
