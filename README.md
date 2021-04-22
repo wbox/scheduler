@@ -75,8 +75,9 @@ npm run storybook
 
 ### Appointments List
 ![List of Appointments]()
+
 ### Deleting Appointment
 ![Deleting an Appointment]()
 
 ### Creating Appointment
-![Adding a new Appointment]()
+![Adding a new Appointment](https://github.com/wbox/scheduler/blob/master/docs/create.png)
