@@ -74,9 +74,9 @@ npm run storybook
 ## Final Product
 
 ### Appointments List
-![]
+![List of Appointments]()
 ### Deleting Appointment
-![]
+![Deleting an Appointment]()
 
 ### Creating Appointment
-![]
+![Adding a new Appointment]()
