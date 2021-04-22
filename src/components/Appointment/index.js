@@ -9,8 +9,6 @@ import useVisualMode from "../../hooks/useVisualMode";
 import Confirm from "./Confirm";
 import Error from "./Error";
 
-
-
 export default function Appointment(props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
@@ -22,12 +20,10 @@ export default function Appointment(props) {
   const ERROR_SAVE = "ERROR_SAVE"
   const ERROR_DELETE = "ERROR_DELETE"
 
-
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
-  // props.interview.interviewer = [];
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -56,7 +52,6 @@ export default function Appointment(props) {
   function closeError() {
     back()
   }
-
 
   return (
     <article className="appointment" data-testid="appointment">

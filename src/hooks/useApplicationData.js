@@ -11,7 +11,6 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
-
   React.useEffect(() => {
     const baseUrl = "/api"
     const promiseDay = axios.get(`${baseUrl}/days`);
@@ -26,9 +25,7 @@ export default function useApplicationData() {
       })
   }, []);
 
-
   const setDay = day => setState({ ...state, day });
-
   const updateSpots = (state) => {
     const newState = { ...state }
     const currentDay = state.days.find(day => day.name === state.day)
