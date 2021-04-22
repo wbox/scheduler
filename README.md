@@ -26,12 +26,12 @@
 
 ## Technical Specifications
 
-* React
-* Webpac, Babel
-* Axios, Websockets
-* Storybook, Weekpack Dev Server, Jest, Testing Library
+* [React](https://reactjs.org/)
+* [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/)
+* [Axios](https://github.com/axios/axios), [Websockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
+* [Storybook](https://storybook.js.org/), [Weekpack Dev Server](https://github.com/webpack/webpack-dev-server), [Jest](https://jestjs.io/en/), [Testing Library](https://testing-library.com/)
 
-The Scheduler client application created using Create React App. Express is the basis for the Scheduler API server application.
+The [Scheduler](https://github.com/lighthouse-labs/scheduler) client application created using [Create React App](https://facebook.github.io/create-react-app/). [Express](https://expressjs.com/) is the basis for the [Scheduler API](https://github.com/lighthouse-labs/scheduler-api) server application.
 
 Both servers run concurrently; requests are proxied from the Webpack development server to the API server.
 
@@ -39,7 +39,7 @@ Both servers run concurrently; requests are proxied from the Webpack development
 
 * The client application communicates with a WebSocket server.
 * When a user books or cancels an interview, all connected users see the update in their browser.
-* WebSockets
+* [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 
 ## Reference
 
