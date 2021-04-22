@@ -24,7 +24,29 @@
 * When the user presses the close button of the error they are returned to the Form or Show view (skipping Status and Confirm).
 * The application makes API requests to load and persist data. We do not lose data after a browser refresh.
 
+## Technical Specifications
 
+* React
+* Webpac, Babel
+* Axios, Websockets
+* Storybook, Weekpack Dev Server, Jest, Testing Library
+
+The Scheduler client application created using Create React App. Express is the basis for the Scheduler API server application.
+
+Both servers run concurrently; requests are proxied from the Webpack development server to the API server.
+
+## Stretch Specifications
+
+* The client application communicates with a WebSocket server.
+* When a user books or cancels an interview, all connected users see the update in their browser.
+* WebSockets
+
+## Reference
+
+* [React Documentation](https://reactjs.org/)
+* [Storybook Documentation](https://storybook.js.org/docs/basics/introduction/)
+* [Jest Documentation](https://jestjs.io/docs/en/getting-started)
+* [Axios Example](https://github.com/axios/axios#example)
 
 
 ## Setup
