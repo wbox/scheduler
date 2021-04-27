@@ -77,7 +77,6 @@ storiesOf("DayList", module)
     <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
   ));
 
-
 const interviewer = {
   id: 1,
   name: "Sylvia Palmer",
