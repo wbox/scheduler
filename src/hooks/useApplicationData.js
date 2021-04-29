@@ -4,6 +4,16 @@ import axios from "axios";
 
 export default function useApplicationData() {
 
+  const confirmDay = (id) => {
+    let dayId = null;
+    for (const dayObj of state.days) {
+      if (dayObj.appointments.includes(id)) {
+        dayId = dayObj.id;
+      }
+    }
+    return dayId;
+  }
+
   let [state, setState] = useState({
     day: "Monday",
     days: [],
