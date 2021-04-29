@@ -24,6 +24,11 @@ export default function Form(props) {
       return;
     }
 
+    if(!interviewer) {
+      setError("You must select and interviewer and get your Scheduler project approved!");
+      return;
+    }
+
     setError("");
     props.onSave(name, interviewer);
   }

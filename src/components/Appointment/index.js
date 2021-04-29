@@ -23,6 +23,7 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
 
   function save(name, interviewer, create) {
+
     const interview = {
       student: name,
       interviewer
@@ -72,7 +73,7 @@ export default function Appointment(props) {
       {mode === SHOW && (
         <Show
           student={props.interview.student}
-          interviewer={props.interviewer}
+          interviewer={props.interview.interviewer}
           onDelete={deleting}
           onEdit={editing}
         />
