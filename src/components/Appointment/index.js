@@ -22,13 +22,13 @@ export default function Appointment(props) {
 
   const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
 
-  function save(name, interviewer) {
+  function save(name, interviewer, create) {
     const interview = {
       student: name,
       interviewer
     };
     transition(SAVING)
-    props.bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview, create)
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true))
   }
