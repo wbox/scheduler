@@ -6,8 +6,8 @@ import Empty from "components/Appointment/Empty";
 import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
 import useVisualMode from "../../hooks/useVisualMode";
-import Confirm from "./Confirm";
-import Error from "./Error";
+import Confirm from "components/Appointment/Confirm";
+import Error from "components/Appointment/Error";
 
 export default function Appointment(props) {
   const EMPTY = "EMPTY";
