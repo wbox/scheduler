@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState } from 'react';
+
 export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial)
   const [history, setHistory] = useState([initial])
@@ -12,8 +13,6 @@ export default function useVisualMode(initial) {
   }
 
   function back() {
-
-    console.log(history)
 
     history.pop()
     if (history.length) {
