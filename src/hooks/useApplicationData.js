@@ -31,7 +31,7 @@ export default function useApplicationData() {
   }, []);
 
   const setDay = day => setState({ ...state, day });
-  
+
   const updateSpots = (state) => {
     const newState = { ...state }
     const currentDay = state.days.find(day => day.name === state.day)
@@ -46,25 +46,31 @@ export default function useApplicationData() {
   function bookInterview(id, interview) {
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
+        const newInterview = { ...interview }
         const appointment = {
           ...state.appointments[id],
-          interview
+          interview : { ...newInterview }
         };
         const appointments = {
           ...state.appointments,
           [id]: appointment
         };
+
+        state.days.map(day => {
+          return (create ? day.id === confirmDay(id) ? { ...day, spots: day.spots - 1 } : { ...day } : { ...day })
+        });
+
         setState(prev => {
           const newState = { ...prev, appointments }
           const updatedSpotState = updateSpots(newState)
           return updatedSpotState
-        })
+        });
       });
   }
 
   function deleteInterview(id) {
     return axios.delete(`/api/appointments/${id}`)
-      .then(resp => {
+      .then(() => {
         const interview = {
           ...state.appointments[id],
           interview: null
@@ -73,6 +79,11 @@ export default function useApplicationData() {
           ...state.appointments,
           [id]: interview
         };
+
+        state.days.map(day => {
+          return (day.id === confirmDay(id) ? { ...day, spots: day.spots + 1 } : { ...day });
+        });
+
         setState(prev => {
           const newState = { ...prev, appointments }
           const updatedSpotState = updateSpots(newState)
@@ -81,30 +92,10 @@ export default function useApplicationData() {
       })
   }
 
-  function editInterview(id, interview) {
-
-    const appointment = {
-      ...state.appointments[id],
-      interview: {...interview}
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
-    setState(prev => {
-      const newState = { ...prev, appointments }
-      const updatedSpotState = updateSpots(newState)
-      return updatedSpotState
-    })
-  }
-
-
   return {
     state,
     setDay,
     bookInterview,
-    deleteInterview,
-    editInterview
+    deleteInterview
   }
 }
