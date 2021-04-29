@@ -22,11 +22,10 @@ export default function useApplicationData() {
   });
 
   React.useEffect(() => {
-    const baseUrl = "/api"
-    const promiseDay = axios.get(`${baseUrl}/days`);
-    const promiseAppointment = axios.get(`${baseUrl}/appointments`);
-    const promiseInterviewer = axios.get(`${baseUrl}/interviewers`)
-    const promises = [promiseDay, promiseAppointment, promiseInterviewer];
+    const promiseDay = axios.get(`/api/days`);
+    const promiseAppointment = axios.get(`/api/appointments`);
+    const promiseInterviewer = axios.get(`/api/interviewers`)
+    const promises = [ promiseDay, promiseAppointment, promiseInterviewer ];
 
     Promise.all(promises)
       .then((all) => {
@@ -49,11 +48,10 @@ export default function useApplicationData() {
     const emptyAppointments = listOfAppointmentsForADay.filter(appointmentId => state.appointments[appointmentId].interview === null)
     const numberOfSpots = emptyAppointments.length
     currentDay.spots = numberOfSpots
-
     return newState
   }
 
-  function bookInterview(id, interview) {
+  function bookInterview(id, interview, create = false) {
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
         const newInterview = { ...interview }
